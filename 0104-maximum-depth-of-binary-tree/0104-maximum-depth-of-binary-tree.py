@@ -8,8 +8,7 @@ class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         if root is None:
             return 0
-        batch = [root]
-        level = 0
+        batch, level = [root], 0
         while batch:
             next_batch = []
             level += 1
