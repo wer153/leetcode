@@ -7,28 +7,9 @@
 
 class Solution:
     def guessNumber(self, n: int) -> int:
-        # pick 맞추기
-        # num > pick -> -1
-        # num < pick -> 1
-        # num == pick return
         low, high = 1, n
-
-        # 1 10
-        #     1 < 10
-        #     mid = 5
-        #     pick = 6
-        # 5 10
-        #     5 < 10
-        #     mid = 7
-        #     pick = 6
-        # 5 7
-        #     5 < 7
-        #     mid = 6
-        #     pick = 6
-
-
         while low <= high:
-            mid = (low+high) //2
+            mid = (low+high) // 2
             guessed_num = guess(mid)
             if guessed_num == 1:
                 low = mid + 1 
