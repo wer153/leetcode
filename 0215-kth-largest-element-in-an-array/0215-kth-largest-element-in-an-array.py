@@ -1,6 +1,10 @@
-from heapq import heapify, nlargest, nsmallest
+from collections import Counter
+
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        if k < len(nums)//2:
-            return nlargest(k, nums)[-1]
-        return nsmallest(len(nums)-k+1, nums)[-1]
+        count = 0
+        for key, value in sorted(Counter(nums).items(), key=lambda x: -x[0]):
+            count += value
+            if k <= count:
+                return key
+        
