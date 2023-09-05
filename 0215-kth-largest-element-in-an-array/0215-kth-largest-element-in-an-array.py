@@ -1,5 +1,3 @@
-from collections import Counter
-
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
         return sorted(nums)[len(nums)-k]
