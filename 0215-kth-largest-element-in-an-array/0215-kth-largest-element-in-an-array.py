@@ -1,5 +1,5 @@
-from heapq import nlargest
+from collections import Counter
 
 class Solution:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        return nlargest(k, nums)[-1]
+        return sorted(nums, reverse=True)[k-1]
