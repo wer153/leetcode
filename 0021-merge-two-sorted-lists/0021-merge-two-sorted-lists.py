@@ -14,16 +14,15 @@ class Solution:
         
 
 def iterate_linked_lists(head1, head2):
-    while head1:
-        while head2:
-            if head2.val < head1.val:
-                yield head2
-                head2 = head2.next
-            else:
-                break
-        yield head1
-        head1 = head1.next
-    else:
-        while head2:
+    while head1 and head2:
+        if head1.val <= head2.val:
+            yield head1
+            head1 = head1.next
+        else:
             yield head2
             head2 = head2.next
+    else:
+        head = head1 or head2
+        while head:
+            yield head
+            head = head.next
