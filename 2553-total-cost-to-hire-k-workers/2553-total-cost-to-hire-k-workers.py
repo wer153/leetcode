@@ -31,18 +31,15 @@ class Solution:
             j -= 1
 
         for _ in range(k):
-            front, back = heappop(front_heap), heappop(back_heap)
+            front, back = front_heap[0], back_heap[0]
             smaller = front if front <= back else back
             popped_index.add(smaller)
             total_hiring_cost += smaller[0]
-            if front == back:
+            if front <= back:
+                heappop(front_heap)
                 push_front_heap()
-                push_back_heap()
-            if front < back:
-                heappush(back_heap, back)
-                push_front_heap()
-            if front > back:
-                heappush(front_heap, front)
+            if front >= back:
+                heappop(back_heap)
                 push_back_heap()
                 
         return total_hiring_cost
