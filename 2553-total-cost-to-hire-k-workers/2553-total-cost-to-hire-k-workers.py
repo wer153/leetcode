@@ -22,13 +22,12 @@ class Solution:
                 j -= 1
 
         popped_index = set()
-        front_heap, back_heap = [], []
-        total_hiring_cost, i, j = 0, 0, len(costs) - 1
-        for _ in range(candidates):
-            heappush(front_heap, (costs[i], i))
-            heappush(back_heap, (costs[j], j))
-            i += 1
-            j -= 1
+        total_hiring_cost = 0
+        i, j = candidates, len(costs) - 1 - candidates
+        front_heap = [(costs[index], index) for index in range(i)]
+        back_heap = [(costs[index], index) for index in range(len(costs)-1, j, -1)]
+        heapify(front_heap)
+        heapify(back_heap)
 
         for _ in range(k):
             front, back = front_heap[0], back_heap[0]
