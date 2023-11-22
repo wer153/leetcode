@@ -11,8 +11,8 @@ class Solution:
             # if all(product.startswith(prefix) for product in products[:3]):
             #     answers.append(products[:3])
             # else:
-                products = [product for product in products if product.startswith(prefix)]
-                answers.append(products[:3])
+            products = [product for product in products if product.startswith(prefix)]
+            answers.append(products[:3])
         return answers
                 
                 
