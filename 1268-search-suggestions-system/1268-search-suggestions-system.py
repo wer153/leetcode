@@ -8,11 +8,11 @@ class Solution:
         answers = []
         products.sort()
         for prefix in accumulate(searchWord):
-            # if all(product.startswith(prefix) for product in products[:3]):
-            #     answers.append(products[:3])
-            # else:
-            products = [product for product in products if product.startswith(prefix)]
-            answers.append(products[:3])
+            if all(product.startswith(prefix) for product in products[:3]):
+                answers.append(products[:3])
+            else:
+                products = [product for product in products if product.startswith(prefix)]
+                answers.append(products[:3])
         return answers
                 
                 
