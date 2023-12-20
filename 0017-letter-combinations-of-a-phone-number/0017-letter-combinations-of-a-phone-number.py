@@ -1,4 +1,5 @@
 from functools import reduce
+
 DIGIT_TO_CHARS = {
     '2': 'abc',
     '3': 'def',
