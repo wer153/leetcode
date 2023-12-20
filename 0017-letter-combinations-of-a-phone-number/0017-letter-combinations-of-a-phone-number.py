@@ -1,4 +1,6 @@
 from functools import reduce
+from itertools import product
+
 
 DIGIT_TO_CHARS = {
     '2': 'abc',
@@ -20,5 +22,9 @@ def get_next_combinations(combinations, digit):
 
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        return list(reduce(get_next_combinations, digits, []))
+        result = []
+        for digit in digits:
+            result = get_next_combinations(result, digit)
+        return result
+        # return list(reduce(get_next_combinations, digits, []))
             
