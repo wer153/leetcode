@@ -1,3 +1,4 @@
+from functools import reduce
 DIGIT_TO_CHARS = {
     '2': 'abc',
     '3': 'def',
@@ -9,18 +10,14 @@ DIGIT_TO_CHARS = {
     '9': 'wxyz',
 }
 
+def get_next_combinations(combinations, digit):
+    return [
+        combination + char
+        for combination in combinations or ['']
+        for char in DIGIT_TO_CHARS[digit]
+    ]
 
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        def get_next_combinations(chars):
-            return [
-                combination + char
-                for combination in combinations or ['']
-                for char in chars
-            ]
-
-        combinations = []
-        for digit in digits:
-            combinations = get_next_combinations(DIGIT_TO_CHARS[digit])
-        return combinations
+        return list(reduce(get_next_combinations, digits, []))
             
