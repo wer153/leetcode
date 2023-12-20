@@ -10,19 +10,23 @@ digit_to_chars = {
         }
 
 
+
+
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        def generate_chars(chars, max_length=len(digits)):
-            if len(chars) == max_length:
-                answer.append(chars)
-                return
-            for char in digit_to_chars[digits[len(chars)]]:
-                generate_chars(chars+char)
-        answer = []
-        generate_chars('')
-        return [word for word in answer if word]
+        def generate_next_combinations(chars):
+            for combination in combinations or ['']:
+                for char in chars:
+                    yield combination + char
+
+        combinations = []
+        for digit in digits:
+            combinations = [
+                combination for combination
+                in generate_next_combinations(digit_to_chars[digit])
+            ]
+        return combinations
     
-        
             
             
             
