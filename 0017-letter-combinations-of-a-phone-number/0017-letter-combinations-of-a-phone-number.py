@@ -14,17 +14,16 @@ digit_to_chars = {
 
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        def generate_next_combinations(chars):
-            for combination in combinations or ['']:
-                for char in chars:
-                    yield combination + char
+        def get_next_combinations(chars):
+            return [
+                combination + char
+                for combination in combinations or ['']
+                for char in chars
+            ]
 
         combinations = []
         for digit in digits:
-            combinations = [
-                combination for combination
-                in generate_next_combinations(digit_to_chars[digit])
-            ]
+            combinations = get_next_combinations(digit_to_chars[digit])
         return combinations
     
             
