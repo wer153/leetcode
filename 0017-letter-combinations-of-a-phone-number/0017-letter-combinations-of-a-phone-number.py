@@ -10,9 +10,6 @@ DIGIT_TO_CHARS = {
 }
 
 
-
-
-
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         def get_next_combinations(chars):
@@ -25,5 +22,5 @@ class Solution:
         combinations = []
         for digit in digits:
             combinations = get_next_combinations(DIGIT_TO_CHARS[digit])
-        return combinations       
+        return combinations
             
