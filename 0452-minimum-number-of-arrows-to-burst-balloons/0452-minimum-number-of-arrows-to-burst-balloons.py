@@ -6,7 +6,7 @@ class Solution:
         count = 0
         points.sort(key=itemgetter(1,0), reverse=True)
         while points:
-            start, end = points.pop()
+            _start, end = points.pop()
             count += 1
             while points and points[-1][0] <= end:
                 points.pop()
