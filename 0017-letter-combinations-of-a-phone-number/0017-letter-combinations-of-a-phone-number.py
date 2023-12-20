@@ -1,13 +1,14 @@
-digit_to_chars = {
-            '2': 'abc',
-            '3': 'def',
-            '4': 'ghi',
-            '5': 'jkl',
-            '6': 'mno',
-            '7': 'pqrs',
-            '8': 'tuv',
-            '9': 'wxyz',
-        }
+DIGIT_TO_CHARS = {
+    '2': 'abc',
+    '3': 'def',
+    '4': 'ghi',
+    '5': 'jkl',
+    '6': 'mno',
+    '7': 'pqrs',
+    '8': 'tuv',
+    '9': 'wxyz',
+}
+
 
 
 
@@ -23,9 +24,6 @@ class Solution:
 
         combinations = []
         for digit in digits:
-            combinations = get_next_combinations(digit_to_chars[digit])
-        return combinations
-    
-            
-            
+            combinations = get_next_combinations(DIGIT_TO_CHARS[digit])
+        return combinations       
             
