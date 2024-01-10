@@ -26,9 +26,7 @@ class Solution:
             ]
 
         visited = set()
-        q = deque([])
-        start_node = (entrance[0], entrance[1]), 0
-        q.append(start_node)
+        q = deque([((entrance[0], entrance[1]), 0)])
   
         while q:
             node, step = q.popleft()
