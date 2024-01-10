@@ -6,14 +6,15 @@ class Solution:
 
 def generate_partitions(string):
     counter = Counter(string)
-    partition_list, partition_set = list(), set()
-    for char in string:
-        partition_list.append(char)
+    start, partition_set = 0, set()
+    for index, char in enumerate(string, start=1):
         partition_set.add(char)
         counter[char] -= 1
         if all(counter[element] == 0 for element in partition_set):
-            yield partition_list
-            partition_list, partition_set = list(), set()
+            yield string[start:index]
+            partition_set = set()
+            start = index
+            
 
         
     
