@@ -10,7 +10,6 @@ def generate_partitions(string):
     for char in string:
         partition_list.append(char)
         partition_set.add(char)
-        print(partition_list, partition_set)
         counter[char] -= 1
         if all(counter[element] == 0 for element in partition_set):
             yield partition_list
