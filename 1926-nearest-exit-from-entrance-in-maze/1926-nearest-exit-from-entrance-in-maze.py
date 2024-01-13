@@ -37,5 +37,7 @@ class Solution:
         batch, visited, step = {tuple(entrance)}, set(), 0
         while batch:
             if 0 < step and any(filter(is_exit, batch)): return step
-            batch, visited, step = get_next_batch(batch), visited | batch, step + 1
+            step += 1
+            visited |= batch
+            batch = get_next_batch(batch)
         return -1
