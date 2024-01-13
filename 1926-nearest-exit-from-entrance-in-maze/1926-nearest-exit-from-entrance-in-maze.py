@@ -1,4 +1,5 @@
 from collections import deque
+from itertools import chain
 
 class Solution:
     def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
@@ -13,28 +14,24 @@ class Solution:
             ])
         
         def get_neighbor_cells(x, y):
-            return [
-                (x_prime, y_prime)
-                for x_prime, y_prime in (
-                    (x+1,y), (x-1,y), (x,y+1), (x,y-1)
-                )
-                if (
-                    x_prime in x_range
-                    and y_prime in y_range
-                    and maze[x_prime][y_prime] == '.'
-                )
-            ]
+            for x_prime, y_prime in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
+                if x_prime in x_range and y_prime in y_range:
+                    if maze[x_prime][y_prime] == '.':
+                        yield (x_prime, y_prime)
 
         visited = set()
-        q = deque([(tuple(entrance), 0)])
-  
-        while q:
-            node, step = q.popleft()
-            if node in visited: continue
-            visited.add(node)
-            if 0 < step and is_exit(*node):
+        batch = {tuple(entrance)}
+        step = 0
+        while batch:
+            if 0 < step and any([True for cell in batch if is_exit(*cell)]):
                 return step
-            q += [(cell, step+1) for cell in get_neighbor_cells(*node)]
+            step += 1
+            visited |= batch
+            batch = {
+                cell
+                for cell in set(chain.from_iterable(get_neighbor_cells(*cell) for cell in batch))
+                if cell not in visited
+            }
         else:
             return -1
 
