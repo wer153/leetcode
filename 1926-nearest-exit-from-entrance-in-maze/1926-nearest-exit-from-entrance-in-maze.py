@@ -2,31 +2,31 @@ from collections import deque
 
 class Solution:
     def nearestExit(self, maze: List[List[str]], entrance: List[int]) -> int:
-        def is_exit(x, y) -> bool:
-            return (
-                x in {0, len(maze) - 1}
-                or y in {0, len(maze[0]) - 1}
-            )
+        x_range, y_range = range(len(maze)), range(len(maze[0]))
         
-        def get_next_cells(x, y, step):
-            next_cells = [
-                (x + x_delta, y + y_delta)
-                for x_delta, y_delta in (
-                    (1, 0), (-1, 0), (0, 1), (0, -1),
-                )
-            ]
+        def is_exit(x, y) -> bool:
+            return any([
+                x == x_range[0],
+                x == x_range[-1],
+                y == y_range[0],
+                y == y_range[-1],
+            ])
+        
+        def get_neighbor_cells(x, y):
             return [
-                ((x_prime, y_prime), step+1)
-                for x_prime, y_prime in next_cells
+                (x_prime, y_prime)
+                for x_prime, y_prime in (
+                    (x+1,y), (x-1,y), (x,y+1), (x,y-1)
+                )
                 if (
-                    0 <= x_prime < len(maze)
-                    and 0 <= y_prime < len(maze[0])
+                    x_prime in x_range
+                    and y_prime in y_range
                     and maze[x_prime][y_prime] == '.'
                 )
             ]
 
         visited = set()
-        q = deque([((entrance[0], entrance[1]), 0)])
+        q = deque([(tuple(entrance), 0)])
   
         while q:
             node, step = q.popleft()
@@ -34,7 +34,7 @@ class Solution:
             visited.add(node)
             if 0 < step and is_exit(*node):
                 return step
-            q += get_next_cells(*node, step)
+            q += [(cell, step+1) for cell in get_neighbor_cells(*node)]
         else:
             return -1
 
