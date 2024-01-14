@@ -11,4 +11,3 @@ class Solution:
             index = jump_back(index)
             if index < 0: return False
         return True
-            
