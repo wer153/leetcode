@@ -1,13 +1,12 @@
 class Solution:
     def orangesRotting(self, grid: List[List[int]]) -> int:
         def get_adjacent_oranges(rotten_oranges):
-            adjacent_oranges = set()
-            for i,j in rotten_oranges:
-                for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
-                    x, y = i+dx, j+dy
-                    if x in range(len(grid)) and y in range(len(grid[0])):
-                        adjacent_oranges.add((x,y))
-            return adjacent_oranges
+            return {
+                (x+dx, y+dy)
+                for x,y in rotten_oranges
+                for dx,dy in ((1,0),(-1,0),(0,1),(0,-1))
+                if (x+dx) in range(len(grid)) and (y+dy) in range(len(grid[0]))
+            }
 
         rotten_oranges = {
             (i,j)
