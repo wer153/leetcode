@@ -5,10 +5,7 @@ class Solution:
             for i,j in rotten_oranges:
                 for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
                     x, y = i+dx, j+dy
-                    if (
-                        x in range(len(grid)) and y in range(len(grid[0]))
-                        and grid[x][y] == 1
-                    ):
+                    if x in range(len(grid)) and y in range(len(grid[0])):
                         adjacent_oranges.add((x,y))
             return adjacent_oranges
 
